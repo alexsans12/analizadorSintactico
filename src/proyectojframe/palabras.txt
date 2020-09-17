@@ -1,0 +1,11 @@
+if
+then
+while
+else
+mensaje
+do
+for
+(
+)
+{
+}
