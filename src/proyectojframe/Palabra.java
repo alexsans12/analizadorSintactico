@@ -96,7 +96,7 @@ public class Palabra {
     }
     
     public void OperadorRelacional() {
-        String[] operador = {"<",">","=","!","<=",">=","!=","==","++","--"};
+        String[] operador = {"<",">","=","!","<=",">=","!=","==","++","--","||","&&"};
         
         for(String t : operador) {
             if(t.equals(this.getToken())) {
@@ -109,7 +109,7 @@ public class Palabra {
     }
     
     public void Operador() {
-        String[] operador = {"/","*","-","+"};
+        String[] operador = {"/","*","-","+","%"};
         
         for(String t : operador) {
             if(t.equals(this.getToken())) {

@@ -16,7 +16,8 @@ import java.util.ArrayList;
  */
 public class Clasificar {
     
-    private String ExR = "[\\s\\-\\+\\<\\>\\=\\(\\)\\{\\}\\!]+(?=(?:[^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)";
+    //private String ExR = "[\\s\\-\\+\\<\\>\\=\\(\\)\\{\\}\\!]+(?=(?:[^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)";
+    private String ExR = "[\\s\\W]+(?=(?:[^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)";
     private String Simbolos = "[\\w\\s\\'\\\"]+";
     private ArrayList<String> PalabrasReservadas = new ArrayList<String>();
     
