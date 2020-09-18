@@ -5,6 +5,7 @@
  */
 package proyectojframe;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -23,6 +24,13 @@ public class view extends javax.swing.JFrame {
      */
     public view() {
         initComponents();
+        this.getContentPane().setBackground(new Color(0,103,158));
+        jPanel1.setBackground(new Color(0,103,158));
+        jPanel2.setBackground(new Color(0,103,158));
+        
+        jPanel1.setForeground(Color.white);
+        jPanel2.setForeground(Color.WHITE);
+        jLabelTitulo.setForeground(Color.white);
     }
     
     public void eliminar(){
@@ -102,7 +110,7 @@ public class view extends javax.swing.JFrame {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelTitulo = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtArea = new javax.swing.JTextArea();
@@ -114,10 +122,9 @@ public class view extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Analizador Sintactico");
-        setBackground(new java.awt.Color(204, 204, 204));
+        setBackground(new java.awt.Color(235, 182, 107));
 
         jTable.setFont(new java.awt.Font("PT Sans", 0, 14)); // NOI18N
-        jTable.setForeground(new java.awt.Color(51, 51, 51));
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -141,14 +148,20 @@ public class view extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable.setGridColor(new java.awt.Color(51, 51, 51));
         jTable.setRowHeight(20);
-        jTable.setShowGrid(false);
+        jTable.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        jTable.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        jTable.setShowGrid(true);
+        jTable.setShowVerticalLines(true);
         jScrollPane2.setViewportView(jTable);
 
-        jLabel2.setFont(new java.awt.Font("PT Sans", 0, 36)); // NOI18N
-        jLabel2.setText("Analizador Sintactico");
+        jLabelTitulo.setFont(new java.awt.Font("PT Sans", 1, 36)); // NOI18N
+        jLabelTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTitulo.setText("Analizador Sintactico");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ingresar texto a analizar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("PT Sans", 0, 14), new java.awt.Color(51, 51, 51))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Ingresar texto a analizar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("PT Sans", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
 
         txtArea.setColumns(20);
         txtArea.setFont(new java.awt.Font("PT Sans", 0, 14)); // NOI18N
@@ -156,7 +169,8 @@ public class view extends javax.swing.JFrame {
         txtArea.setRows(5);
         jScrollPane1.setViewportView(txtArea);
 
-        btnEnviar.setFont(new java.awt.Font("PT Sans", 0, 14)); // NOI18N
+        btnEnviar.setBackground(new java.awt.Color(255, 255, 255));
+        btnEnviar.setFont(new java.awt.Font("PT Sans", 1, 16)); // NOI18N
         btnEnviar.setForeground(new java.awt.Color(51, 51, 51));
         btnEnviar.setText("Enviar");
         btnEnviar.addActionListener(new java.awt.event.ActionListener() {
@@ -187,7 +201,7 @@ public class view extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ingresar archivo a analizar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("PT Sans", 0, 14), new java.awt.Color(51, 51, 51))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Ingresar archivo a analizar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("PT Sans", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
 
         txtAreaArchivo.setEditable(false);
         txtAreaArchivo.setColumns(20);
@@ -196,7 +210,8 @@ public class view extends javax.swing.JFrame {
         txtAreaArchivo.setRows(5);
         jScrollPane3.setViewportView(txtAreaArchivo);
 
-        btnArchivo.setFont(new java.awt.Font("PT Sans", 0, 14)); // NOI18N
+        btnArchivo.setBackground(new java.awt.Color(255, 255, 255));
+        btnArchivo.setFont(new java.awt.Font("PT Sans", 1, 16)); // NOI18N
         btnArchivo.setForeground(new java.awt.Color(51, 51, 51));
         btnArchivo.setText("Abrir Archivo");
         btnArchivo.addActionListener(new java.awt.event.ActionListener() {
@@ -213,8 +228,8 @@ public class view extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,32 +246,24 @@ public class view extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(307, 307, 307)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 50, Short.MAX_VALUE))))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addComponent(jScrollPane2)
+            .addComponent(jLabelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addComponent(jLabelTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
         );
 
         pack();
@@ -327,7 +334,7 @@ public class view extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnArchivo;
     private javax.swing.JButton btnEnviar;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
