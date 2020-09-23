@@ -16,7 +16,8 @@ public class Palabra {
     private String token;
     private boolean reservada, id, operadorRacional, digito, operador, unknow;
     private int linea;
-
+    private Clasificar cl = new Clasificar();
+    
     public String getToken() {
         return token;
     }
@@ -81,9 +82,8 @@ public class Palabra {
         this.linea = linea;
     }
     
-    public void Reservada() {
-        Clasificar cl = new Clasificar();
-        ArrayList<String> palabrasReservadas = cl.Palabras();
+    public void reservada() {
+        ArrayList<String> palabrasReservadas = this.cl.palabrasReservadas();
         
         for(String t : palabrasReservadas) {
             if(t.equals(this.getToken())) {
@@ -95,10 +95,10 @@ public class Palabra {
         }
     }
     
-    public void OperadorRelacional() {
-        String[] operador = {"<",">","=","!","<=",">=","!=","==","++","--","||","&&"};
+    public void operadorRelacional() {
+        ArrayList<String> operadoresRelacionales = this.cl.operadoresRelacionales();
         
-        for(String t : operador) {
+        for(String t : operadoresRelacionales) {
             if(t.equals(this.getToken())) {
                 this.setOperadorRacional(true);
                 break;
@@ -108,7 +108,7 @@ public class Palabra {
         }
     }
     
-    public void Operador() {
+    public void operador() {
         String[] operador = {"/","*","-","+","%"};
         
         for(String t : operador) {
@@ -121,7 +121,7 @@ public class Palabra {
         }
     }
     
-    public void Digito() {
+    public void digito() {
         try {
             int digito = Integer.parseInt(this.getToken());
             this.setDigito(true);
@@ -131,32 +131,27 @@ public class Palabra {
         }
     }
     
-    public void Variable(String linea) {
-        if((linea.contains(this.getToken() + " =") || linea.contains(this.getToken() + "=") ||
-           linea.contains(this.getToken() + "!=" ) || linea.contains(this.getToken() + " !=") ||
-           linea.contains(this.getToken() + ">") || linea.contains(this.getToken() + " >") ||
-           linea.contains(this.getToken() + "<=") || linea.contains(this.getToken() + " <=") ||
-           linea.contains(this.getToken() + "<") || linea.contains(this.getToken() + " <") ||
-           linea.contains(this.getToken() + ">=") || linea.contains(this.getToken() + " >=") ||
-           linea.contains(this.getToken() + "++") || linea.contains(this.getToken() + "--")) && this.isDigito() == false) {
-            
-            this.setId(true);
-        } 
-        else if((linea.contains("=" + this.getToken()) || linea.contains("= " + this.getToken()) ||
-           linea.contains("!=" + this.getToken()) || linea.contains("!= " + this.getToken()) ||
-           linea.contains(">" + this.getToken()) || linea.contains("> " + this.getToken()) ||
-           linea.contains("<=" + this.getToken()) || linea.contains("<= " + this.getToken()) ||
-           linea.contains("<" + this.getToken()) || linea.contains("< " + this.getToken()) ||
-           linea.contains(">=" + this.getToken()) || linea.contains(">= " + this.getToken())) && this.isDigito() == false) {
-            
-            this.setId(true);
-        } 
-        else {
-            this.setId(false);
+    public void variable(String linea) {
+        ArrayList<String> operadoresRelacionales = this.cl.operadoresRelacionales();
+        
+        for(String op : operadoresRelacionales) {
+            if((linea.contains(this.getToken() + " " + op) || linea.contains(this.getToken() + op)) && this.isDigito() == false) {
+                
+                this.setId(true);
+                break;
+            } 
+            else if((linea.contains(op + this.getToken()) || linea.contains(op + " " + this.getToken())) && this.isDigito() == false) {
+
+                this.setId(true);
+                break;
+            } 
+            else {
+                this.setId(false);
+            }
         }
     }
     
-    public void Unknow() {
+    public void desconocido() {
         if(!this.isDigito() && !this.isId() && !this.isOperador() && !this.isOperadorRacional() 
             && !this.isReservada()) {
             this.setUnknow(true);

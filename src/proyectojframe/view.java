@@ -70,12 +70,12 @@ public class view extends javax.swing.JFrame {
                 if(t2.matches("[^\\\"]+")) {
                     pa = new Palabra();
                     pa.setToken(t2);
-                    pa.Operador();
-                    pa.OperadorRelacional();
-                    pa.Reservada();
-                    pa.Digito();
-                    pa.Variable(t1);
-                    pa.Unknow();
+                    pa.operador();
+                    pa.operadorRelacional();
+                    pa.reservada();
+                    pa.digito();
+                    pa.variable(t1);
+                    pa.desconocido();
                     pa.setLinea(i);
                     model.addRow(new Object[]{pa.getToken(), pa.isReservada(), pa.isId(), 
                         pa.isOperadorRacional(), pa.isDigito(), pa.isOperador(), pa.isUnknow(), pa.getLinea()});
@@ -85,10 +85,10 @@ public class view extends javax.swing.JFrame {
                 if(!t3.isEmpty()) {
                     pa = new Palabra();
                     pa.setToken(t3);
-                    pa.Reservada();
-                    pa.Operador();
-                    pa.OperadorRelacional();
-                    pa.Unknow();
+                    pa.reservada();
+                    pa.operador();
+                    pa.operadorRelacional();
+                    pa.desconocido();
                     pa.setLinea(i);
                     model.addRow(new Object[]{pa.getToken(), pa.isReservada(), pa.isId(), 
                         pa.isOperadorRacional(), pa.isDigito(), pa.isOperador(), pa.isUnknow(), pa.getLinea()});
@@ -292,6 +292,8 @@ public class view extends javax.swing.JFrame {
             
         } catch (IOException e2) {
             
+        } finally {
+            archivo.delete();
         }
         listar(txtAreaArchivo.getText());
     }//GEN-LAST:event_btnArchivoActionPerformed

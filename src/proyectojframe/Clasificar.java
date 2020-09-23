@@ -20,6 +20,7 @@ public class Clasificar {
     private String ExR = "[\\s\\W]+(?=(?:[^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)";
     private String Simbolos = "[\\w\\s\\'\\\"]+";
     private ArrayList<String> PalabrasReservadas = new ArrayList<String>();
+    private ArrayList<String> OperadoresRelacionales = new ArrayList<String>();
     
     
     public String[] Separar(String texto) {
@@ -32,9 +33,14 @@ public class Clasificar {
         return textos;
     }
     
-    public ArrayList Palabras() {
+    public ArrayList palabrasReservadas() {
         ArrayList<String> palabras = this.PalabrasReservadas;
         return palabras;
+    }
+    
+    public ArrayList operadoresRelacionales() {
+        ArrayList<String> operadores = this.OperadoresRelacionales;
+        return operadores;
     }
 
     public Clasificar() {
@@ -44,7 +50,7 @@ public class Clasificar {
 
         try {
             //Abrir el archivo y crear el FileReader y el BufferedReader
-            archivo = new File("/Users/alex/NetBeansProjects/proyectoJframe/src/proyectojframe/palabras.txt");
+            archivo = new File("src/proyectojframe/palabras.txt");
             fr = new FileReader(archivo);
             br = new BufferedReader(fr);
 
@@ -52,6 +58,31 @@ public class Clasificar {
             String linea;
             while((linea = br.readLine()) != null) {
                 this.PalabrasReservadas.add(linea);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Cerramos el Fichero, para asegurar que todo vaya bien ira en un try and catch
+            try {
+                if(null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        try {
+            //Abrir el archivo y crear el FileReader y el BufferedReader
+            archivo = new File("src/proyectojframe/operadoresRelacionales.txt");
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+
+            //Leer el archivo linea por linea
+            String linea;
+            while((linea = br.readLine()) != null) {
+                this.OperadoresRelacionales.add(linea);
             }
 
         } catch (Exception e) {
