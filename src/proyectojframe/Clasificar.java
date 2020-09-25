@@ -16,11 +16,11 @@ import java.util.ArrayList;
  */
 public class Clasificar {
     
-    //private String ExR = "[\\s\\-\\+\\<\\>\\=\\(\\)\\{\\}\\!]+(?=(?:[^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)";
     private String ExR = "[\\s\\W]+(?=(?:[^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)";
     private String Simbolos = "[\\w\\s\\'\\\"]+";
     private ArrayList<String> PalabrasReservadas = new ArrayList<String>();
     private ArrayList<String> OperadoresRelacionales = new ArrayList<String>();
+    private ArrayList<String> Operadores = new ArrayList<String>();
     
     
     public String[] Separar(String texto) {
@@ -40,6 +40,11 @@ public class Clasificar {
     
     public ArrayList operadoresRelacionales() {
         ArrayList<String> operadores = this.OperadoresRelacionales;
+        return operadores;
+    }
+    
+    public ArrayList operadores() {
+        ArrayList<String> operadores = this.Operadores;
         return operadores;
     }
 
@@ -83,6 +88,31 @@ public class Clasificar {
             String linea;
             while((linea = br.readLine()) != null) {
                 this.OperadoresRelacionales.add(linea);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Cerramos el Fichero, para asegurar que todo vaya bien ira en un try and catch
+            try {
+                if(null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        try {
+            //Abrir el archivo y crear el FileReader y el BufferedReader
+            archivo = new File("src/proyectojframe/operadores.txt");
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+
+            //Leer el archivo linea por linea
+            String linea;
+            while((linea = br.readLine()) != null) {
+                this.Operadores.add(linea);
             }
 
         } catch (Exception e) {

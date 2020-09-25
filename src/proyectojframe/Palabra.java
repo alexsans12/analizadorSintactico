@@ -21,6 +21,10 @@ public class Palabra {
     public String getToken() {
         return token;
     }
+    
+    public String getTokenLower() {
+        return token.toLowerCase();
+    }
 
     public void setToken(String token) {
         this.token = token;
@@ -86,7 +90,7 @@ public class Palabra {
         ArrayList<String> palabrasReservadas = this.cl.palabrasReservadas();
         
         for(String t : palabrasReservadas) {
-            if(t.equals(this.getToken())) {
+            if(t.equals(this.getTokenLower())) {
                 this.setReservada(true);
                 break;
             }
@@ -109,9 +113,9 @@ public class Palabra {
     }
     
     public void operador() {
-        String[] operador = {"/","*","-","+","%"};
+        ArrayList<String> operadores = this.cl.operadores();
         
-        for(String t : operador) {
+        for(String t : operadores) {
             if(t.equals(this.getToken())) {
                 this.setOperador(true);
                 break;
@@ -123,7 +127,7 @@ public class Palabra {
     
     public void digito() {
         try {
-            int digito = Integer.parseInt(this.getToken());
+            int digito = Integer.parseInt(this.getTokenLower());
             this.setDigito(true);
         } catch(NumberFormatException nfe) {
             nfe.getMessage();
@@ -133,22 +137,38 @@ public class Palabra {
     
     public void variable(String linea) {
         ArrayList<String> operadoresRelacionales = this.cl.operadoresRelacionales();
+        ArrayList<String> operadores = this.cl.operadores();
         
-        for(String op : operadoresRelacionales) {
-            if((linea.contains(this.getToken() + " " + op) || linea.contains(this.getToken() + op)) && this.isDigito() == false) {
+        for(String opR : operadoresRelacionales) {
+            if((linea.contains(this.getToken() + " " + opR) || linea.contains(this.getToken() + opR)) && this.isDigito() == false) {
                 
                 this.setId(true);
                 break;
             } 
-            else if((linea.contains(op + this.getToken()) || linea.contains(op + " " + this.getToken())) && this.isDigito() == false) {
+            else if((linea.contains(opR + this.getToken()) || linea.contains(opR + " " + this.getToken())) && this.isDigito() == false) {
 
                 this.setId(true);
                 break;
             } 
             else {
-                this.setId(false);
+                for(String op : operadores) {
+                    if((linea.contains(this.getToken() + " " + op) || linea.contains(this.getToken() + op)) && this.isDigito() == false) {
+
+                        this.setId(true);
+                        break;
+                    } 
+                    else if((linea.contains(op + this.getToken()) || linea.contains(op + " " + this.getToken())) && this.isDigito() == false) {
+
+                        this.setId(true);
+                        break;
+                    } 
+                    else {
+                        this.setId(false);
+                    }
+                }
             }
         }
+        
     }
     
     public void desconocido() {

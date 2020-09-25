@@ -274,7 +274,7 @@ public class view extends javax.swing.JFrame {
         txtAreaArchivo.setText("");
         eliminar();
         
-        listar(txtArea.getText());
+        listar((txtArea.getText()));
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void btnArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchivoActionPerformed
