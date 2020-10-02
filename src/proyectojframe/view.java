@@ -11,10 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
-/**
- *
- * @author alex
- */
+
 public class view extends javax.swing.JFrame {
 
     /**

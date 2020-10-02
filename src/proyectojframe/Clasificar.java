@@ -11,10 +11,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- *
- * @author alex
- */
 public class Clasificar {
     
     // esta variable tiene asignada la expresion regular que separa el texto sin incluir simbolos

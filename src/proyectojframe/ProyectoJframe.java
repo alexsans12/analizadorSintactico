@@ -5,10 +5,6 @@
  */
 package proyectojframe;
 
-/**
- *
- * @author alex
- */
 public class ProyectoJframe {
 
     /**

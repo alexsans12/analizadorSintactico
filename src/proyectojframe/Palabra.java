@@ -7,10 +7,6 @@ package proyectojframe;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author alex
- */
 public class Palabra {
     
     // Variables declaradas globales dentro de la clase
