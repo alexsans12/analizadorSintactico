@@ -6,9 +6,7 @@
 package proyectojframe;
 
 import java.awt.Color;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import javax.swing.JFileChooser;
@@ -34,15 +32,25 @@ public class view extends javax.swing.JFrame {
     }
     
     public void eliminar(){
+        // Se obtiene el modelo de la tabla jTable
         DefaultTableModel tb = (DefaultTableModel) jTable.getModel();
+        
+        // Se obtiene el numero de filas de la tabla
         int a = jTable.getRowCount()-1;
+        
+        // Se eliminan cada una de las filas
         for (int i = a; i >= 0; i--) {          
             tb.removeRow(tb.getRowCount()-1);
         }
+        
+        // Se agrega el modelo sin filas
+        jTable.setModel(tb);
     }
     
     public void listar(String texto) {
+        // Esta variable sirve para identificar la linea donde se encuentran los tokens
         int i = 1;
+        
         // Obtiene el texto del TextArea
         String[] lineas = texto.split("\n");
         
@@ -52,50 +60,127 @@ public class view extends javax.swing.JFrame {
         // Se crea una variable para la clase palabra
         Palabra pa;
         
-        // Se crea la tabla
+        // Se crea la tabla que mostrara los datos
         DefaultTableModel model = new DefaultTableModel();
+        
+        // Crea la columna Token de la tabla, mostrara la palabra, signo o digito analizado
         model.addColumn("Token");
+        
+        /* Crea la columna Palabra Reservada de la tabla, 
+        mostrara un si el token es una palabra reservada que se encuentra en palabras.txt
+        lo hara con un true o false  */
         model.addColumn("Palabra Reservada");
+        
+        /* Crea la columna ID  de la tabla, esta mostrara si el token es una 
+        variable */
         model.addColumn("ID");
+        
+        /* Crea la columna Operador Racional de la tabla, esta mostrara
+         si el token es un operador racional que se encuentra en operadoresRacionales.txt
+        lo hara con un true o false */
         model.addColumn("Operador Racional");
+        
+        /* Crea la columna Digito de la tabla, esta mostrara si el token es digito o no con un true o false */
         model.addColumn("Digito");
+        
+        /* Crea la columna Operador de la tabla, esta mostrara si el token 
+        es un operador que se encuentra en operadores.txt */
         model.addColumn("Operador");
-        model.addColumn("No reconocido");
+        
+        /* Crea la columna No Reconocido de la tabla, mostrara si el token
+        no se clasifica como palabra reservada, id, operador racional, digito o operador
+        se le asignara como no reconocido*/
+        model.addColumn("No Reconocido");
+        
+        // Crea la columna Linea de la tabla, esta mostrara en que linea se encuentra el token
         model.addColumn("Linea");
         
+        // Este for separara el texto ingresado en lineas para analizarlo
         for(String t1 : lineas) {
+            
+            //El array analizar con tiene cada una de las pabras y digitos
             String[] analizar = clas.Separar(t1);
+            
+            // El array simbolos con tiene solo los simbolos que se encuentren en la linea
             String[] simbolos = clas.SepararSimbolos(t1);
+            
+            //Este for recore el array de analizar para poder clasificarlos
             for(String t2 : analizar) {
+                
+                //Este if verifica que no se clasifiquen los espacion en blanco
                 if(t2.matches("[^\\\"]+")) {
+                    
+                    // Se crea clase palabra
                     pa = new Palabra();
+                    
+                    // Se le asigna un token a palabra
                     pa.setToken(t2);
+                    
+                    // Se analiza para indentificar si es un operador
                     pa.operador();
+                    
+                    // Se analiza para identificar si en un operador racional
                     pa.operadorRelacional();
+                    
+                    // Se analiza para identificar si es una palabra reservada
                     pa.reservada();
+                    
+                    // Se analiza para identificar si es un digito
                     pa.digito();
+                    
+                    // Se analiza para identificar si es un ID
                     pa.variable(t1);
+                    
+                    // Se analiza para identificar si es desconocido
                     pa.desconocido();
+                    
+                    // Define en que linea se encuentra el token
                     pa.setLinea(i);
+                    
+                    // Se agrega una fila con toda la informacion que se encuentra en la variable pa de la clase palabra
                     model.addRow(new Object[]{pa.getToken(), pa.isReservada(), pa.isId(), 
                         pa.isOperadorRacional(), pa.isDigito(), pa.isOperador(), pa.isUnknow(), pa.getLinea()});
                 }
             }
+            
+            // Este for recorre el array simbolos para analizar los simbolos que se encuentren en la variable t1
             for(String t3 : simbolos) {
+                
+                // Este if evita que se analizen espacios vacios
                 if(!t3.isEmpty()) {
+                    
+                    // Se crea la clase palabra
                     pa = new Palabra();
+                    
+                    // Se le asigna un token a palabra
                     pa.setToken(t3);
+                    
+                    // Se analiza para identificar si es una palabra reservada
                     pa.reservada();
+                    
+                    // Se analiza para indentificar si es un operador
                     pa.operador();
+                    
+                    // Se analiza para identificar si en un operador racional
                     pa.operadorRelacional();
+                    
+                    // Se analiza para identificar si es desconocido
                     pa.desconocido();
+                    
+                    // Define en que linea se encuentra el token
                     pa.setLinea(i);
+                    
+                    // Se agrega una fila con toda la informacion que se encuentra en la variable pa de la clase palabra
                     model.addRow(new Object[]{pa.getToken(), pa.isReservada(), pa.isId(), 
                         pa.isOperadorRacional(), pa.isDigito(), pa.isOperador(), pa.isUnknow(), pa.getLinea()});
                 }
             }
+            
+            // Se incrementa la linea para saber que hemos cambiado a otra
             i++;
         }
+        
+        // Se ingresa la tabla creada al objeto tabla creado en el jFrame
         jTable.setModel(model);
     }
 
@@ -270,32 +355,46 @@ public class view extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        // TODO add your handling code here:
+        // Se vacia el text area
         txtAreaArchivo.setText("");
+        
+        // Se elimina los datos de la tabla
         eliminar();
         
+        // Se ingresan los nuevos datos para rellenar la tabla nuevamente
         listar((txtArea.getText()));
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void btnArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchivoActionPerformed
-        // TODO add your handling code here:
+        // Se vacia el text area
         txtArea.setText("");
+        
+        // Se elimina los datos de la tabla
         eliminar();
         
+        // Se crear la variable chooser para guardar el archivo que se ingrese
         JFileChooser chooser = new JFileChooser();
+        
+        // Se abre una ventana para escoger el archivo
         chooser.showOpenDialog(null);
+        
+        // Se guarda el archivo en la varible file
         File archivo = new File(chooser.getSelectedFile().getAbsolutePath());
 
         try {
+            // Lee el contenido del archivo
             String Extraer = new String(Files.readAllBytes(archivo.toPath()));
+            
+            // Se ingresa el contenido del archivo a un text area;
             txtAreaArchivo.setText(Extraer);
             
         } catch (IOException e2) {
-            
-        } finally {
-            archivo.delete();
+            // Se captura el error si llega a surgir alguno no rompa el programa
         }
+        
+        // El texto que se mando al text area se lee y se ingresan los datos a la tabla
         listar(txtAreaArchivo.getText());
+        
     }//GEN-LAST:event_btnArchivoActionPerformed
 
     /**
