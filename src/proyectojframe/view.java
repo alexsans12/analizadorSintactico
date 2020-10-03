@@ -134,13 +134,16 @@ public class view extends javax.swing.JFrame {
                     // Define en que linea se encuentra el token
                     pa.setLinea(i);
                     
-                    // Se agrega una fila con toda la informacion que se encuentra en la variable pa de la clase palabra
+                    /* Se agrega una fila con toda la informacion que se encuentra 
+                    en la variable pa de la clase palabra */
                     model.addRow(new Object[]{pa.getToken(), pa.isReservada(), pa.isId(), 
-                        pa.isOperadorRacional(), pa.isDigito(), pa.isOperador(), pa.isUnknow(), pa.getLinea()});
+                        pa.isOperadorRacional(), pa.isDigito(), pa.isOperador(),
+                        pa.isUnknow(), pa.getLinea()});
                 }
             }
             
-            // Este for recorre el array simbolos para analizar los simbolos que se encuentren en la variable t1
+            /* Este for recorre el array simbolos para analizar los simbolos 
+            que se encuentren en la variable t1 */
             for(String t3 : simbolos) {
                 
                 // Este if evita que se analizen espacios vacios
@@ -167,9 +170,11 @@ public class view extends javax.swing.JFrame {
                     // Define en que linea se encuentra el token
                     pa.setLinea(i);
                     
-                    // Se agrega una fila con toda la informacion que se encuentra en la variable pa de la clase palabra
+                    /* Se agrega una fila con toda la informacion que se encuentra
+                    en la variable pa de la clase palabra */
                     model.addRow(new Object[]{pa.getToken(), pa.isReservada(), pa.isId(), 
-                        pa.isOperadorRacional(), pa.isDigito(), pa.isOperador(), pa.isUnknow(), pa.getLinea()});
+                        pa.isOperadorRacional(), pa.isDigito(), pa.isOperador(), 
+                        pa.isUnknow(), pa.getLinea()});
                 }
             }
             
@@ -351,7 +356,8 @@ public class view extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {
+    
         // Se vacia el text area
         txtAreaArchivo.setText("");
         
@@ -362,7 +368,8 @@ public class view extends javax.swing.JFrame {
         listar((txtArea.getText()));
     }//GEN-LAST:event_btnEnviarActionPerformed
 
-    private void btnArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchivoActionPerformed
+    private void btnArchivoActionPerformed(java.awt.event.ActionEvent evt) {
+
         // Se vacia el text area
         txtArea.setText("");
         

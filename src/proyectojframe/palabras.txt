@@ -5,6 +5,10 @@ else
 mensaje
 do
 for
+switch
+case
+break
+pow
 (
 )
 {

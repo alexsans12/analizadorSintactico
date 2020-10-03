@@ -19,15 +19,15 @@ public class Palabra {
     public String getToken() {
         return token;
     }
-    
-    // retorna lo que contenga token pero siempre en minusculas
-    public String getTokenLower() {
-        return token.toLowerCase();
-    }
 
     // Ingresa un valor a token
     public void setToken(String token) {
         this.token = token;
+    }
+    
+    // retorna lo que contenga token pero siempre en minusculas
+    public String getTokenLower() {
+        return token.toLowerCase();
     }
 
     // retorna lo que contenga reserva
@@ -116,12 +116,14 @@ public class Palabra {
             // este if compara el token con el elemento del array list
             if(t.equals(this.getTokenLower())) {
                 
-                // si el if se cumple se ingresa un true(que el token si es una palabra reservada) a reservada
+                /* si el if se cumple se ingresa un true(que el token si 
+                es una palabra reservada) a reservada */
                 this.setReservada(true);
                 // termina la función
                 break;
             }
-            else //si no se cumple el if se ingresa false(que el token no es palabra reservada) en reservada
+            else /*si no se cumple el if se ingresa false(que el token no es palabra reservada)
+                en reservada */
                 this.setReservada(false);
         }
     }
@@ -140,12 +142,14 @@ public class Palabra {
             // este if compara el token con el elemento del array list
             if(t.equals(this.getToken())) {
                 
-                // si el if se cumple se ingresa un true(que el token si es un operador racional) operadorRacional           
+                /* si el if se cumple se ingresa un true(que el token si es un operador racional)
+                operadorRacional  */
                 this.setOperadorRacional(true);
                 // termina la función
                 break;
             }
-            else //si no se cumple el if se ingresa false(que el token no es operador racional) en operador racional
+            else /*si no se cumple el if se ingresa false(que el token no es operador racional)
+                en operador racional */
                 this.setOperadorRacional(false);
         }
     }
@@ -164,12 +168,14 @@ public class Palabra {
             // este if compara el token con el elemento del array list
             if(t.equals(this.getToken())) {
                 
-                // si el if se cumple se ingresa un true(que el token si es un operador) a operador             
+                /* si el if se cumple se ingresa un true(que el token si es un operador)
+                a operador */
                 this.setOperador(true);
                 // termina la función
                 break;
             }
-            else //si no se cumple el if se ingresa false(que el token no es operador) en operador
+            else /*si no se cumple el if se ingresa false(que el token no es operador)
+                en operador */
                 this.setOperador(false);
         }
     }
@@ -192,7 +198,7 @@ public class Palabra {
         }
     }
     
-    /* Funcion que verifica si el token es un id llamada en la funcion variable,
+    /* Funcion que verifica si el token es un id llamada en la funcion variable,                                                    
        se crean dos array list uno para operadores relacionales y otro para operadores */
     public void variable(String linea) {
         
@@ -209,8 +215,10 @@ public class Palabra {
             
             /* este if verifica la linea donde se encuentra el token sumandole al string 
                del token el operador racional del for para saber si esta rodiado de ese 
-               operador racional así clasificarlo como id(variable), este if verifica el lado izquierdo */
-            if((linea.contains(this.getToken() + " " + opR) || linea.contains(this.getToken() + opR)) && this.isDigito() == false) {
+               operador racional así clasificarlo como id(variable), este if verifica 
+               el lado izquierdo */
+            if((linea.contains(this.getToken() + " " + opR) || linea.contains(this.getToken() + opR))
+                    && this.isDigito() == false) {
                 
                 // si cumple con la condicion se ingresa true al id
                 this.setId(true);
@@ -218,14 +226,17 @@ public class Palabra {
             }
             /* este if verifica la linea donde se encuentra el token sumandole al string 
                del token el operador racional del for para saber si esta rodiado de ese 
-               operador racional así clasificarlo como id(variable), este if verifica el lado derecho */
-            else if((linea.contains(opR + this.getToken()) || linea.contains(opR + " " + this.getToken())) && this.isDigito() == false) {
+               operador racional así clasificarlo como id(variable), este if verifica el 
+               lado derecho */
+            else if((linea.contains(opR + this.getToken()) || 
+                    linea.contains(opR + " " + this.getToken())) && this.isDigito() == false) {
                 
                 // si cumple con la condicion se ingresa true al id
                 this.setId(true);
                 break;
             } 
-            // si no se cumple con los operadores racionales se hara la verificacion con los operadores
+            /* si no se cumple con los operadores racionales se hara la verificacion 
+            con los operadores */
             else {
                 
                 // Este for accede a cada elemento del array list de operadores
@@ -233,8 +244,10 @@ public class Palabra {
                     
                     /* este if verifica la linea donde se encuentra el token sumandole al string 
                        del token el operador del for para saber si esta rodiado de ese 
-                       operador así clasificarlo como id(variable), este if verifica el lado izquierdo */
-                    if((linea.contains(this.getToken() + " " + op) || linea.contains(this.getToken() + op)) && this.isDigito() == false) {
+                       operador así clasificarlo como id(variable), este if verifica el 
+                       lado izquierdo */
+                    if((linea.contains(this.getToken() + " " + op) || 
+                            linea.contains(this.getToken() + op)) && this.isDigito() == false) {
                         
                         // si cumple con la condicion se ingresa true al id
                         this.setId(true);
@@ -242,15 +255,18 @@ public class Palabra {
                     } 
                     /* este if verifica la linea donde se encuentra el token sumandole al string 
                        del token el operador del for para saber si esta rodiado de ese 
-                       operador así clasificarlo como id(variable),, este if verifica el lado derecho */
-                    else if((linea.contains(op + this.getToken()) || linea.contains(op + " " + this.getToken())) && this.isDigito() == false) {
+                       operador así clasificarlo como id(variable),, este if verifica 
+                    el lado derecho */
+                    else if((linea.contains(op + this.getToken()) || 
+                            linea.contains(op + " " + this.getToken())) && this.isDigito() == false) {
 
                         // si cumple con la condicion se ingresa true al id
                         this.setId(true);
                         break;
                     } 
                     else {
-                        // si no se cumplen ninguna de las condiciones anteriores se ingresa false al id
+                        /* si no se cumplen ninguna de las condiciones anteriores se 
+                        ingresa false al id*/
                         this.setId(false);
                     }
                 }
@@ -263,7 +279,8 @@ public class Palabra {
        si es haci se le asignara al token como desconocido */
     public void desconocido() {
         
-        // este if verifica que las clasificaciones esten en false para poder darle como desconocido al token
+        /* este if verifica que las clasificaciones esten en false para poder 
+           darle como desconocido al token */
         if(!this.isDigito() && !this.isId() && !this.isOperador() && !this.isOperadorRacional() 
             && !this.isReservada()) {
             // se asigna true a unknow
